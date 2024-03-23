@@ -68,6 +68,8 @@ def get_non_hidden_columns(labels) -> List[str]:
         for label in labels:
             columns.append(f"Time spent in {label}")
 
+    columns.append(f"# change requests")
+
     return columns
 
 
@@ -166,6 +168,7 @@ def write_to_markdown(
                 for label in labels:
                     if f"Time spent in {label}" in columns:
                         file.write(f" {issue.label_metrics[label]} |")
+            file.write(f" {issue.num_change_requests} |")
             file.write("\n")
         file.write(
             "\n_This report was generated with the [Issue Metrics Action](https://github.com/github/issue-metrics)_\n"

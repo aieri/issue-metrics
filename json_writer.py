@@ -54,7 +54,8 @@ def write_to_json(
                 "time_to_answer": "None",
                 "label_metrics": {
                     "bug": "1 day, 16:24:12"
-                }
+                },
+                "num_change_requests": "3"
             },
             {
                 "title": "Issue 2",
@@ -64,7 +65,8 @@ def write_to_json(
                 "time_to_close": "4 days, 0:00:00",
                 "time_to_answer": "1 day, 0:00:00",
                 "label_metrics": {
-                }
+                },
+                "num_change_requests": "0"
             },
         ],
         "search_query": "is:issue is:open repo:owner/repo"
@@ -148,6 +150,7 @@ def write_to_json(
                 "time_to_close": str(issue.time_to_close),
                 "time_to_answer": str(issue.time_to_answer),
                 "label_metrics": formatted_label_metrics,
+                "num_change_requests": str(issue.num_change_requests),
             }
         )
 

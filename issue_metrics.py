@@ -41,6 +41,7 @@ from time_to_first_response import (
     get_stats_time_to_first_response,
     measure_time_to_first_response,
 )
+from num_change_requests import num_change_requests
 from config import get_env_vars
 
 
@@ -148,6 +149,7 @@ def get_per_issue_metrics(
                 None,
                 None,
                 None,
+                None,
             )
             issue_with_metrics.time_to_first_response = measure_time_to_first_response(
                 None, issue, ignore_users
@@ -163,6 +165,7 @@ def get_per_issue_metrics(
                 issue.title,  # type: ignore
                 issue.html_url,  # type: ignore
                 issue.user["login"],  # type: ignore
+                None,
                 None,
                 None,
                 None,
@@ -183,6 +186,7 @@ def get_per_issue_metrics(
             if issue.state == "closed":  # type: ignore
                 if pull_request:
                     issue_with_metrics.time_to_close = measure_time_to_merge(pull_request, ready_for_review_at)
+                    issue_with_metrics.num_change_requests = num_change_requests(pull_request)
                 else:
                     issue_with_metrics.time_to_close = measure_time_to_close(issue, None)
                 num_issues_closed += 1
